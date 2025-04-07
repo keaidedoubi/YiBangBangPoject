@@ -1,0 +1,6 @@
+{
+    "domain": "localhost",
+    "secret": "s3cr3t",
+    "serverUrl": "http://example.com/",
+    "redirectServerUrl": "http://example.com/"
+}

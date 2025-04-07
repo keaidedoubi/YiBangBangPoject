@@ -1,0 +1,12 @@
+{
+    "max_tokens": 1000,
+    "temperature": 0.8,
+    "modelId": "deepseek-chat",
+    "url": "https://api.deepseek.com/chat/completions",
+    "APIKey": "sk-123",
+    "sseurl": "http://localhost:3000/api/sse",
+    "seeverUrl":"http://localhost:3000/api/",
+
+    "domain": "localhost",
+    "secret": "s3cr3t"
+}
