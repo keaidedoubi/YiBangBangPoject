@@ -50,7 +50,7 @@ model Session {
 
   user   User   @relation(fields: [userId], references: [id])
   userId String
-
+  title String
   // type Int //1=Talk mode;2=QA mode
   contents Conversation[] 
   tokensSum Int?

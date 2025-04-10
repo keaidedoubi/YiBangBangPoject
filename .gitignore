@@ -6,3 +6,5 @@ node_modules
 config.json
 servicesConfig.json
 .DS_Store
+dev.db
+/migrations
