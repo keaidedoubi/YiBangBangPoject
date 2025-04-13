@@ -112,9 +112,10 @@ export default function ChatMainPage() {
                 body: JSON.stringify({
                     content: inputContent,
                     sessionId: loaderData.sessionId
-                }),
-            });
-
+                })
+               
+            }); 
+            // console.log("res",response)
             // 将响应对象存入状态
             fetcher.data = response;
         } catch (error) {
@@ -295,28 +296,20 @@ export async function action({ request }: ActionFunctionArgs) {
         } else {
             res = await addContent(content, userId, sessionId);
         }
-
+ 
         // 确保响应体是 Web ReadableStream
-        const originalStream = res.body;
+        const originalStream = res.body?.getReader();
         if (!originalStream) {
             return new Response("No response body", { status: 500 });
         }
-
-        // 创建转换流来处理 sessionId 注入
-        const transformStream = new TransformStream({
-            start(controller) {
-                if (isNewSession) {
-                    const initialMessage = `data: {"sessionId":"${sessionId}"}\n\n`;
-                    controller.enqueue(new TextEncoder().encode(initialMessage));
-                }
-            },
-            transform(chunk, controller) {
-                controller.enqueue(chunk);
-            }
-        });
-
+        console.log(originalStream)
+        //////
         return new Response(
-            originalStream.pipeThrough(transformStream),
+            new ReadableStream({
+                start(controller) {
+                      controller.enqueue(1);
+                    }
+            }),
             {
                 headers: {
                     "Content-Type": "text/event-stream",
